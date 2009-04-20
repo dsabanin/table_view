@@ -1,13 +1,55 @@
 TableView
 =========
 
-Introduction goes here.
-
+Yet another TableView component for Rails. This one is really easy to use, at least for me ;)
 
 Example
 =======
 
-Example goes here.
+In controller:
 
+  @table = TableView.new(Document, self) do |t|
+    t.column :title,          :text   => true
+    t.column :restricted,     :label  => "paid"
+    t.column :authors_names,  :th     => { :style => "width:12%" }, :label => "author", :text => true
+    t.column :created_at,     :th     => { :style => "width:8%"  }, :label => "date"
+    t.column :views,          :th     => { :style => "width:5%"  }
+    t.column :comments_count, :th     => { :style => "width:8%"  }, :label => "comments"
+  end
 
-Copyright (c) 2009 [name of plugin creator], released under the MIT license
+  @documents = @table.paginated_items(:per_page => 20)
+
+In view:
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:2%"><input type="checkbox" /></th>
+        <th style="width:2%"></th>
+        <%= @table.headers %>
+        <th style="width:8%"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= render @documents %>
+    </tbody>
+
+  </table>
+
+  <%= will_paginate *@table.to_will_paginate %>
+  
+Code above will render table with clickable column names, to sort table contents.
+TableView also scans current params for following keys, in order to perform several actions, like filtering
+and search. Here's an example URLs and what will they do:
+
+ /documents?documents_filter_by_restricted=t - will filter show only documents with restricted set to true
+ 
+ /documents?documents_filter_by_state=published - will filter show only documents with state set to published
+ 
+ /documents?documents_search_by_text_fields=money - will filter documents using LIKE %money% search on all fields marked as :text => true
+ 
+
+* If you are curious, "documents_" prefix exists for all params keys to allow you to have several table view components on a single page *
+
+Copyright (c) 2009 Dima Sabanin, released under the MIT license
