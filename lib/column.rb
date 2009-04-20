@@ -32,12 +32,6 @@ class TableView
       "#{self} #{sort_order}"
     end
   
-    def render_sort_order
-      if active?
-        '<span class="sort">%s</span>' % (ascending? ? '&darr;' : '&uarr;')
-      end
-    end
-
     def reverse_sort_order
       if ascending? then "desc" else "asc" end
     end

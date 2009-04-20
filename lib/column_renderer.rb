@@ -12,9 +12,15 @@ class TableView
     def header(column)
       label = column.human_name
       field = link_to(label, url_hash_for(column))
-      helpers.content_tag(:th, "#{field} #{column.render_sort_order}", column.options[:th])
+      helpers.content_tag(:th, "#{field} #{render_sort_order(column)}", column.options[:th])
     end
 
+    def render_sort_order(column)
+      if column.active?
+        '<span class="sort">%s</span>' % (column.ascending? ? '&darr;' : '&uarr;')
+      end
+    end
+    
     def url_hash_for(column)
       {
         params.sort_by_field_name => column,
