@@ -102,7 +102,7 @@ private
   end
   
   def mark_active_column
-    candidate = @columns.first
+    candidate = @columns.find(&:default?) || @columns.first
     if params.sort_by_field
       candidate = @columns.find { |col| col.to_s == params.sort_by_field }
     end

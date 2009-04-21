@@ -48,6 +48,10 @@ class TableView
       options[:text]
     end
   
+    def default?
+      options[:default]
+    end
+    
     def to_s
       @column
     end

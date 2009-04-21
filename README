@@ -11,8 +11,8 @@ In controller:
   @table = TableView.new(Document, self) do |t|
     t.column :title,          :text   => true
     t.column :restricted,     :label  => "paid"
-    t.column :authors_names,  :th     => { :style => "width:12%" }, :label => "author", :text => true
-    t.column :created_at,     :th     => { :style => "width:8%"  }, :label => "date"
+    t.column :authors_names,  :th     => { :style => "width:12%" }, :label => "author", :text    => true
+    t.column :created_at,     :th     => { :style => "width:8%"  }, :label => "date",   :default => true
     t.column :views,          :th     => { :style => "width:5%"  }
     t.column :comments_count, :th     => { :style => "width:8%"  }, :label => "comments"
   end
