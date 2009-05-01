@@ -11,7 +11,11 @@ class TableView
   
     def header(column)
       label = column.human_name
-      field = link_to(label, url_hash_for(column))
+      if column.not_sortable?
+        field = label
+      else
+        field = link_to(label, url_hash_for(column))
+      end
       helpers.content_tag(:th, "#{field} #{render_sort_order(column)}", column.options[:th])
     end
 

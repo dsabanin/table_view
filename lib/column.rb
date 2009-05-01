@@ -52,6 +52,10 @@ class TableView
       options[:default]
     end
     
+    def not_sortable?
+      options[:not_sortable]
+    end
+    
     def to_s
       @column
     end

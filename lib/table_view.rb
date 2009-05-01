@@ -28,7 +28,7 @@ class TableView
   end
   
   def paginated_items(options={})
-    @_items ||= paginated_items_without_caching(options)
+    @items ||= paginated_items_without_caching(options)
   end
   
   def count_items
