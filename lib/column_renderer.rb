@@ -16,7 +16,7 @@ class TableView
       else
         field = link_to(label, url_hash_for(column))
       end
-      helpers.content_tag(:th, "#{field} #{render_sort_order(column)}", column.options[:th])
+      helpers.content_tag(:th, "#{field}&nbsp;#{render_sort_order(column)}", column.options[:th])
     end
 
     def render_sort_order(column)
